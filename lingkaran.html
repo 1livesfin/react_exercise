@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kalkulator Lingkaran</title>
+
+  <!-- React CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 30px;
+      width: 320px;
+      color: white;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      text-align: center;
+      animation: fadeIn 0.8s ease;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #ffffff;
+      color: #5a4bff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #5a4bff;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .hasil {
+      margin-top: 20px;
+      text-align: left;
+      background: rgba(255,255,255,0.2);
+      padding: 15px;
+      border-radius: 10px;
+      animation: slideUp 0.5s ease;
+    }
+
+    .hasil p {
+      margin: 8px 0;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes slideUp {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function App() {
+      const [jari, setJari] = React.useState("");
+      const [hasil, setHasil] = React.useState(null);
+
+      const hitungLingkaran = () => {
+        const r = parseFloat(jari);
+
+        if (isNaN(r) || r <= 0) {
+          alert("Masukkan angka yang valid!");
+          return;
+        }
+
+        const luas = Math.PI * r * r;
+        const keliling = 2 * Math.PI * r;
+
+        setHasil({
+          luas: luas.toFixed(2),
+          keliling: keliling.toFixed(2)
+        });
+      };
+
+      return (
+        <div className="card">
+          <h2>⚪ Kalkulator Lingkaran</h2>
+
+          <input
+            type="number"
+            placeholder="Masukkan jari-jari"
+            value={jari}
+            onChange={(e) => setJari(e.target.value)}
+          />
+
+          <button onClick={hitungLingkaran}>Hitung</button>
+
+          {hasil && (
+            <div className="hasil">
+              <p>📐 Luas: {hasil.luas}</p>
+              <p>📏 Keliling: {hasil.keliling}</p>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>
