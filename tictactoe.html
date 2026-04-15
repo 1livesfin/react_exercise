@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tic Tac Toe</title>
+
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    color:white;
+}
+.card{
+    background:#111;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 0 30px #00f2ff;
+    text-align:center;
+}
+.board{
+    display:grid;
+    grid-template-columns:repeat(3,90px);
+    gap:10px;
+    margin:20px 0;
+}
+.cell{
+    width:90px;
+    height:90px;
+    font-size:30px;
+    font-weight:bold;
+    border:none;
+    border-radius:15px;
+    cursor:pointer;
+    background:#222;
+    color:#00f2ff;
+    box-shadow:0 0 10px #00f2ff;
+}
+button.reset{
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    background:#00f2ff;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+a{
+    color:#00f2ff;
+    display:block;
+    margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+
+function App(){
+    const [board,setBoard] = React.useState(Array(9).fill(null));
+    const [xNext,setXNext] = React.useState(true);
+
+    const winner = calculateWinner(board);
+
+    function handleClick(i){
+        if(board[i] || winner) return;
+        const newBoard = [...board];
+        newBoard[i] = xNext ? "X" : "O";
+        setBoard(newBoard);
+        setXNext(!xNext);
+    }
+
+    function reset(){
+        setBoard(Array(9).fill(null));
+        setXNext(true);
+    }
+
+    return(
+        <div className="card">
+            <h2>🎮 Tic Tac Toe</h2>
+
+            <div className="board">
+                {board.map((cell,i)=>(
+                    <button 
+                        key={i} 
+                        className="cell"
+                        onClick={()=>handleClick(i)}>
+                        {cell}
+                    </button>
+                ))}
+            </div>
+
+            <h3>
+                {winner ? `🏆 Pemenang: ${winner}` : `Giliran: ${xNext ? "X" : "O"}`}
+            </h3>
+
+            <button className="reset" onClick={reset}>Reset</button>
+            <a href="index.html">⬅ Kembali</a>
+        </div>
+    )
+}
+
+function calculateWinner(board){
+    const lines=[
+        [0,1,2],[3,4,5],[6,7,8],
+        [0,3,6],[1,4,7],[2,5,8],
+        [0,4,8],[2,4,6]
+    ];
+    for(let [a,b,c] of lines){
+        if(board[a] && board[a]===board[b] && board[a]===board[c]){
+            return board[a];
+        }
+    }
+    return null;
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+
+</script>
+</body>
+</html>
