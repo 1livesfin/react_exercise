@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kalkulator Segitiga</title>
+
+  <!-- React CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 30px;
+      width: 320px;
+      color: white;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      text-align: center;
+      animation: fadeIn 0.8s ease;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #ffffff;
+      color: #ff5e3a;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ff5e3a;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .hasil {
+      margin-top: 20px;
+      text-align: left;
+      background: rgba(255,255,255,0.2);
+      padding: 15px;
+      border-radius: 10px;
+      animation: slideUp 0.5s ease;
+    }
+
+    .hasil p {
+      margin: 8px 0;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes slideUp {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function App() {
+      const [alas, setAlas] = React.useState("");
+      const [tinggi, setTinggi] = React.useState("");
+      const [sisiA, setSisiA] = React.useState("");
+      const [sisiB, setSisiB] = React.useState("");
+      const [sisiC, setSisiC] = React.useState("");
+      const [hasil, setHasil] = React.useState(null);
+
+      const hitungSegitiga = () => {
+        const a = parseFloat(alas);
+        const t = parseFloat(tinggi);
+        const s1 = parseFloat(sisiA);
+        const s2 = parseFloat(sisiB);
+        const s3 = parseFloat(sisiC);
+
+        if ([a, t, s1, s2, s3].some(v => isNaN(v) || v <= 0)) {
+          alert("Isi semua nilai dengan benar!");
+          return;
+        }
+
+        const luas = 0.5 * a * t;
+        const keliling = s1 + s2 + s3;
+
+        setHasil({
+          luas,
+          keliling
+        });
+      };
+
+      return (
+        <div className="card">
+          <h2>🔺 Kalkulator Segitiga</h2>
+
+          <input
+            type="number"
+            placeholder="Alas"
+            value={alas}
+            onChange={(e) => setAlas(e.target.value)}
+          />
+
+          <input
+            type="number"
+            placeholder="Tinggi"
+            value={tinggi}
+            onChange={(e) => setTinggi(e.target.value)}
+          />
+
+          <input
+            type="number"
+            placeholder="Sisi A"
+            value={sisiA}
+            onChange={(e) => setSisiA(e.target.value)}
+          />
+
+          <input
+            type="number"
+            placeholder="Sisi B"
+            value={sisiB}
+            onChange={(e) => setSisiB(e.target.value)}
+          />
+
+          <input
+            type="number"
+            placeholder="Sisi C"
+            value={sisiC}
+            onChange={(e) => setSisiC(e.target.value)}
+          />
+
+          <button onClick={hitungSegitiga}>Hitung</button>
+
+          {hasil && (
+            <div className="hasil">
+              <p>📐 Luas: {hasil.luas}</p>
+              <p>📏 Keliling: {hasil.keliling}</p>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>
