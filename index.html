@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Geometri App</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #141e30, #243b55);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      font-size: 32px;
+      text-align: center;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 600px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .card:hover {
+      transform: translateY(-5px) scale(1.05);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      display: block;
+    }
+
+    .emoji {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🚀 Geometri & Mini App</h1>
+
+  <div class="container">
+    <div class="card">
+      <a href="counter.html">
+        <div class="emoji">🔢</div>
+        Counter
+      </a>
+    </div>
+
+    <div class="card">
+      <a href="kubus.html">
+        <div class="emoji">🧊</div>
+        Kubus
+      </a>
+    </div>
+
+    <div class="card">
+      <a href="lingkaran.html">
+        <div class="emoji">⚪</div>
+        Lingkaran
+      </a>
+    </div>
+
+    <div class="card">
+      <a href="persegi.html">
+        <div class="emoji">⬜</div>
+        Persegi
+      </a>
+    </div>
+
+    <div class="card">
+      <a href="segitiga.html">
+        <div class="emoji">🔺</div>
+        Segitiga
+      </a>
+    </div>
+
+    <div class="card">
+      <a href="tabung.html">
+        <div class="emoji">🛢️</div>
+        Tabung
+      </a>
+    </div>
+
+    <div class="card">
+      <a href="tictactoe.html">
+        <div class="emoji">❌</div>
+        Tic Tac Toe
+      </a>
+    </div>
+  </div>
+</body>
+</html>
